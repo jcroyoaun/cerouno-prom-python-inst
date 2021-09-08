@@ -32,7 +32,7 @@
 # Use case - Counter type metrics
 Calcularemos el numero de http requests hechos a nuestra app.
 
-## Pasos
+## Pasos (agregando un counter que se incrementa por 1)
 * (agregar el siguiente codigo en la linea #2) - Importamos counter en nuestra aplicacion
 
 `from prometheus_client import start_http_server, Counter`
@@ -48,6 +48,23 @@ Calcularemos el numero de http requests hechos a nuestra app.
 
 
 Y probamos (accedemos puerto 8100 y damos refresh varias veces)...
+
+## Pasos 2 (agregando un counter que se incrementa random)
+* (agregar el siguiente codigo en la linea #3) - Importamos random en nuestra aplicacion
+
+`import random`
+
+
+* (agregar el siguiente codigo en la linea #6) - El primer valor es nuestra metrica y el segundo es el #HELP
+
+`RANDOM_COUNT = Counter('app_random_count', 'Incrementing the counter by random value')`
+
+* (agregar el siguiente codigo en la linea 15 y 16) - 
+
+```
+random_val = random.random()*10
+RANDOM_COUNT.inc(random_val)
+```
 
 # Apendix
 # # Convencionalidades para nombrar metricas
