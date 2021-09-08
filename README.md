@@ -27,3 +27,31 @@
 
 * (agregar el siguiente codigo en la linea #5)
 `METRICS_PORT = 8001`
+
+
+# Use case - Counter type metrics
+Calcularemos el numero de http requests hechos a nuestra app.
+
+## Pasos
+* (agregar el siguiente codigo en la linea #2) - Importamos counter en nuestra aplicacion
+
+`from prometheus_client import start_http_server, Counter`
+
+* (agregar el siguiente codigo en la linea #4) - El primer valor es nuestra metrica y el segundo es el #HELP
+
+`REQUEST_COUNT = Counter('app_request_count', 'Total app http request count')`
+
+
+* (agregar el siguiente codigo en la linea 12)
+
+`REQUEST_COUNT.inc()`
+
+
+Y probamos (accedemos puerto 8100 y damos refresh varias veces)...
+
+# Apendix
+# # Convencionalidades para nombrar metricas
+* Debe empezar con una letra, y puede ser seguido de cualquier numero de letras, numeros o guiones bajos (_).
+* Debe tener nombres unicos. los Client libraries deben reportar un error si tratamos de registrar la misma metrica dos veces en nuestra aplicacion.
+* En casos aplicables, cuando expongamos los time series de un tipo de metrica counter, el sufijo "_total" debe ser parte del nombre.
+
