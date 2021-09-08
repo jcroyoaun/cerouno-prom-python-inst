@@ -1,20 +1,26 @@
 import http.server
-from prometheus_client import start_http_server, Counter
+import time
+from prometheus_client import start_http_server, Summary
 
-REQUEST_COUNT = Counter('app_request_count', 'Total app http request count')
+REQUEST_RESPOND_TIME = Summary('app_response_latency_seconds', 'Response latency in seconds')
 
 APP_PORT = 8000
 METRICS_PORT = 8001
 
 class HandleRequests(http.server.BaseHTTPRequestHandler):
 
+    @REQUEST_RESPOND_TIME.time()
     def do_GET(self):
-        REQUEST_COUNT.inc()
+        #start_time = time.time()
+        time.sleep(6)
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
         self.wfile.write(bytes("<html><head><title>Mi aplicacion instrumentada</title></head><body><center><h2>Cerouno - Demo de instrumentation para Prometheus con Python.</center></h2></body></html>", "utf-8"))
         self.wfile.close()
+        #time_taken = time.time() - start_time
+       # REQUEST_RESPOND_TIME.observe(time_taken)
+
 
 if __name__ == "__main__":
     start_http_server(METRICS_PORT)
