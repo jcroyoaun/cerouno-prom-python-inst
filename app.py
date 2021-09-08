@@ -10,7 +10,7 @@ class HandleRequests(http.server.BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(bytes("<html><head><title>My instrumented application</title></head><body style='color: #333; margin-top: 30px;'><center><h2>Cerouno - Demo de instrumentation para Prometheus con Python.</center></h2></body></html>", "utf-8"))
+        self.wfile.write(bytes("<html><head><title>Mi aplicacion instrumentada</title></head><body><center><h2>Cerouno - Demo de instrumentation para Prometheus con Python.</center></h2></body></html>", "utf-8"))
         self.wfile.close()
 
 if __name__ == "__main__":
