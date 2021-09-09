@@ -47,7 +47,7 @@ Calcularemos el numero de http requests hechos a nuestra app.
 `REQUEST_COUNT.inc()`
 
 
-Y probamos (accedemos puerto 8100 y damos refresh varias veces)...
+Y probamos (accedemos puerto 8000 y damos refresh varias veces)...
 
 ## Pasos 2 (agregando un counter que se incrementa random)
 * (agregar el siguiente codigo en la linea #3) - Importamos random en nuestra aplicacion
